@@ -1,9 +1,9 @@
 pub fn add(left: usize, right: usize) -> usize {
-    left + right2
+    left + right
 }
 
 pub fn compiles() {
-		    println!("I compile.")
+    println!("I compile.")
 }
 
 #[cfg(test)]
