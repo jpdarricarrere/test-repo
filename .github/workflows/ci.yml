@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     concurrency:
-      group: run_tests-${{ github.ref }}
+      group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
 
     steps:
