@@ -21,11 +21,12 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-          components: rustfmt
-          components: clippy
-    - name: Rustfmt
-      run: cargo fmt --all -- --check
-    - name: Clippy
-      run: cargo clippy -- -D warnings
-    - name: Test
-      run: cargo test --all-features
+          components:
+          - rustfmt
+          - clippy
+      - name: Rustfmt
+        run: cargo fmt --all -- --check
+      - name: Clippy
+        run: cargo clippy -- -D warnings
+      - name: Test
+        run: cargo test --all-features
