@@ -7,23 +7,23 @@ jobs:
     name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
-      - name: Rustfmt
-        - uses: actions/checkout@v3
-        - uses: dtolnay/rust-toolchain@stable
-          with:
-            toolchain: stable
-            components: rustfmt
-        - run: cargo fmt --all -- --check
-      - name: Clippy
-        - uses: actions/checkout@v3
-        - uses: dtolnay/rust-toolchain@stable
-          with:
-            toolchain: stable
-            components: clippy
-        - run: cargo clippy -- -D warnings
-      - name: Test Suite
-        - uses: actions/checkout@v3
-        - uses: dtolnay/rust-toolchain@stable
-          with:
-            toolchain: stable
-        - run: cargo test --all-features
+    - name: Rustfmt
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: rustfmt
+      - run: cargo fmt --all -- --check
+    - name: Clippy
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: clippy
+      - run: cargo clippy -- -D warnings
+    - name: Test Suite
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+      - run: cargo test --all-features
