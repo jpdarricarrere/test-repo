@@ -2,9 +2,7 @@ name: CI Suite
 
 on:
   push:
-    branches: [main, staging, trying]
-  pull_request:
-    branches: [main]
+    branches: [staging, trying]
 
 jobs:
   run_tests:
