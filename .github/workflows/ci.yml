@@ -1,29 +1,29 @@
-on: [push, pull_request]
+name: CI Suite
 
-name: Continuous integration
+on:
+  push:
+    branches:
+      - master
+    pull_request:
+      - master
 
 jobs:
-  ci:
-    name: Continuous Integration
+  run_tests:
+    name: Run Tests
     runs-on: ubuntu-latest
+    concurrency:
+      group: run_tests-${{ github.ref }}
+      cancel-in-progress: true
     steps:
-    - name: Rustfmt
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
           components: rustfmt
-      - run: cargo fmt --all -- --check
-    - name: Clippy
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
           components: clippy
-      - run: cargo clippy -- -D warnings
-    - name: Test Suite
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
-      - run: cargo test --all-features
+    - name: Rustfmt
+      run: cargo fmt --all -- --check
+    - name: Clippy
+      run: cargo clippy -- -D warnings
+    - name: Test
+      run: cargo test --all-features
