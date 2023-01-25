@@ -3,7 +3,8 @@ pub fn add(left: usize, right: usize) -> usize {
 }
 
 pub fn compiles() {
-    println!("I compile.")
+    println!("I compile.");
+    println!("I want to use bors");
 }
 
 #[cfg(test)]
