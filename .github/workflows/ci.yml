@@ -2,16 +2,14 @@ name: CI Suite
 
 on:
   push:
-    branches:
-    - main
+    branches: [main, staging, trying]
   pull_request:
-    branches:
-    - main
+    branches: [main]
 
 jobs:
   run_tests:
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    name: Run Tests
+    # if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    name: Run All Tests
     runs-on: ubuntu-latest
 
     concurrency:

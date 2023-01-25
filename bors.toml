@@ -1,0 +1,2 @@
+status = ["Run All Tests"]
+delete_merged_branches = true
