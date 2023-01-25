@@ -11,22 +11,26 @@ on:
 jobs:
   run_tests:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    name: Run Tests
+    # name: Run Tests
     runs-on: ubuntu-latest
+
     concurrency:
       group: run_tests-${{ github.ref }}
       cancel-in-progress: true
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
-          components:
-          - rustfmt
-          - clippy
-      - name: Rustfmt
-        run: cargo fmt --all -- --check
-      - name: Clippy
-        run: cargo clippy -- -D warnings
-      - name: Test
-        run: cargo test --all-features
+    - uses: actions/checkout@v3
+
+    - uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+        components: rustfmt, clippy
+
+    - name: Rustfmt
+      run: cargo fmt --all -- --check
+
+    - name: Clippy
+      run: cargo clippy -- -D warnings
+
+    - name: Test
+      run: cargo test --all-features
