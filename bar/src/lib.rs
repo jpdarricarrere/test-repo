@@ -4,8 +4,7 @@ pub fn add(left: usize, right: usize) -> usize {
 
 pub fn compiles() {
     println!("I compile.");
-    panic!("AAAAHHHH!");
-    println!("But break!")
+    println!("But break!");
 }
 
 #[cfg(test)]
@@ -16,5 +15,6 @@ mod tests {
     fn it_works() {
         let result = add(2, 2);
         assert_eq!(result, 4);
+        panic!("AAAAHHHH!");
     }
 }
