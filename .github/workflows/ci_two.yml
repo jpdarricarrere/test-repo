@@ -1,0 +1,49 @@
+name: CI Suite
+
+on:
+  pull_request:
+  push:
+    branches: [master] #, staging, trying]
+
+permissions:
+  contents: read
+
+jobs:
+  run_all_tests:
+    # For bot commits:
+    # if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    # To limit on draft PRs, when enabled on PRs.
+    # Event triggers on direct push to master and on pushes to pull requests that are not drafts.
+    if: ${{ github.event.pull_request.draft == false }}
+    name: Run All Tests
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    # Only allow one workflow of this time to run at each time.
+    # Cancel old pending ones if new ones exist.
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: 5.0.5
+
+      - name: Start Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: clippy, rustfmt
+
+      - name: Rustfmt
+        run: cargo fmt --all -- --check
+
+      - name: Clippy
+        run: cargo clippy -- -D warnings
+
+      # - name: Test
+      #   run: cargo test --all-features
