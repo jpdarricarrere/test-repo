@@ -3,8 +3,8 @@ pub fn add(left: usize, right: usize) -> usize {
 }
 
 pub fn compiles() {
-    println!("I compile :)");
-    println!( I dont compile :();
+    println!("I compile :) (:");
+    println!( I dont compile :( !!);
 }
 
 #[cfg(test)]
