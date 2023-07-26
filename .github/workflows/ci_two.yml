@@ -14,7 +14,7 @@ jobs:
     # if: "!contains(github.event.head_commit.message, '[ci skip]')"
     # To limit on draft PRs, when enabled on PRs.
     # Event triggers on direct push to master and on pushes to pull requests that are not drafts.
-    if: ${{ github.event.pull_request.draft == false }}
+    # if: ${{ github.event.pull_request.draft == false }}
     name: Run All Tests
     timeout-minutes: 30
     runs-on: ubuntu-latest
