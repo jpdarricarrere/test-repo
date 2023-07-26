@@ -3,7 +3,7 @@ name: CI Suite
 on:
   pull_request:
   push:
-    branches: [master] #, staging, trying]
+    branches: [master, main] #, staging, trying]
 
 permissions:
   contents: read
